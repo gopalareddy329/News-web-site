@@ -1,0 +1,15 @@
+{% extends 'main.html'%}
+
+{% block content%}
+<form method="POST" action="">
+    {% csrf_token %}
+    {% for fields in form %}
+        <label>{{fields.label}}</label>
+        {{fields}}<br>
+    {% endfor %}
+    <label>Password : - </label>
+    <input type="password" placeholder="Enter password" name="pass1"/><br>
+    <input type="submit" value="Submit"/><br>
+    <b>{{error}}<b>
+</form>
+{% endblock content%}

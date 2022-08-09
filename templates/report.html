@@ -1,0 +1,67 @@
+{% extends 'main.html'%}
+{% block content %}
+
+<style>
+    .report{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+    .comment-container{
+        position:absolute;
+        left: 20%;
+        border: 2px solid black;
+        padding: 4px;
+        width: 55%;
+    }
+    input[type='text']{
+        width: 80%;
+        text-align: center;
+        border: 1px solid black;
+    }
+    .active{
+        border: 2px solid black;
+        padding: 4px;
+    }
+</style>
+<div class="report">
+    
+    <div>
+        {% include 'Browse_topic.html'%}
+    </div>
+    
+    <div>
+        <h4>@{{reports.host}} &nbsp;&nbsp;{{reports.created|timesince}} ago</h4>
+        <b>{{reports.headlines}}</b><br><br>
+        {{reports.description}}
+
+
+    </div>
+    
+    <div class="active">
+        <h2>Active Users : - </h2>
+        {% for participent in participents%}
+        <a href="{% url 'profile' participent.id %}">@{{participent.username}}</a><br>
+        {% endfor %}
+    </div>
+</div>
+<div class="comment-container">
+        <h3>Comments : - </h3><br>
+        {% for comment in comments %}
+        <small>@{{comment.name}}</small>
+        <h6>{{comment.created|timesince}} ago</h6>
+        {{comment.body}}<br>
+        {% if request.user == comment.name %}
+        <a href="{% url 'editcomment' comment.id %}">Edit</a>
+        <a href="{% url 'deletecomment' comment.id %}">Delete</a>
+        {% endif %}
+        <hr>
+        {% endfor %}
+        {% if request.user.is_authenticated %}
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input type="text" placeholder="Type .... " name="comment"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% endif %}
+    </div>
+{% endblock content%}

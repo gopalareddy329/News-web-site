@@ -1,0 +1,30 @@
+{% extends 'main.html'%}
+{% block content %}
+
+<style>
+    .profile{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
+<div class="profile">
+
+    <div>
+        {% include 'Browse_topic.html'%}
+    </div>
+    <div>
+        <h1>Profile : -</h1>
+        <h5>User : - {{users.username}}</h5>
+        <small>Created on {{users.date_joined}}</small><br>
+        <small>Bio : - {{users.bio}}</small>
+        {% if request.user == users%}
+            <button><a href="{% url 'editprofile' request.user.id %}">Edit</a></button>
+        {% endif %}
+        {% include 'Report_all.html' %}
+    </div>
+    <div>
+        {% include 'Activity.html' %}
+    </div>
+</div>
+{% endblock %}

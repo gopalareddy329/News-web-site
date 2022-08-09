@@ -1,0 +1,12 @@
+<h2>Reports : -</h2>
+<small>Result : - {{report_count}}</small><br>
+{% for report in reports %}
+<h4><a href="{% url 'report' report.id %}">{{report.headlines}}</a></h4>
+<small>Topic : - {{report.topic}}</small>
+<small><a href="{% url 'profile' report.host.id %}">@{{report.host}}</a></small>
+{% if request.user == report.host %}
+<a href="{% url 'editreport' report.id %}">Edit</a>
+<a href="{% url 'deletereport' report.id %}">Delete</a>
+{% endif %}
+<hr>
+{% endfor %}

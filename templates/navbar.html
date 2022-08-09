@@ -1,0 +1,40 @@
+<style>
+    .input{
+        position: absolute;
+        text-align: center;
+        left: 30%;
+        top: 2%;
+        width: 45%;
+        height: 4%;
+        border: none;
+        background-color: rgb(142, 234, 234);
+        border-left: 10px solid rgb(5, 162, 240);
+    }
+    .nav-container{
+        position: absolute;
+        margin: 10px;
+        right:5%;
+        top: 2%;
+    }
+    hr{
+        height: 3px;
+        background-color: black;
+    }
+</style>
+    <h1><a href="/">Reports</a></h1>
+
+    <form method="get" action="{% url 'home' %}">
+        <input class="input" type="text" placeholder="Search.." name="q">
+    </form>
+
+    <div class="nav-container">
+        {% if request.user.is_authenticated %}
+        <button><a href="{% url 'profile' request.user.id %}">@{{request.user}}</a></button>
+        <br>
+        <button><a href="{% url 'logoutuser' %} " style="margin: 20px;">Logout</a></button>
+        {% else %}
+        <button><a href="{% url 'loginuser'%}">Login</a></button>
+        {%endif%}
+    
+    </div>
+    <hr>

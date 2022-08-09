@@ -1,0 +1,25 @@
+
+{% extends 'main.html' %}
+{% block content%}
+<style>
+    .home{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+<div class="home">
+    <div>
+        {% include 'Browse_topic.html' %}
+    </div>
+    
+    <div>
+        
+        {% include 'Report_all.html' %}
+    </div>
+    
+    <div>
+        {% include 'Activity.html' %}
+    </div>
+   
+</div>
+{% endblock content%}

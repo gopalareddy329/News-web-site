@@ -1,0 +1,29 @@
+<style>
+    .activity-container{
+        border: 2px solid black;
+        padding: 5px;
+    }
+    .aedit{
+        position: relative;
+        float: right;
+        
+    }
+    .adelete{
+        position: relative;
+        float: right;
+        
+    }
+</style>
+
+<div class="activity-container">
+    <h3>Activity : - </h3>
+    {% for comment in comments%}
+    <small><a href="{% url 'profile' comment.name.id %}">@{{comment.name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;{{comment.created|timesince}}</small>
+    {% if request.user == comment.name %}
+
+    <a href="{% url 'editcomment' comment.id %}" class="aedit">Edit</a><br>
+    <a href="{% url 'deletecomment' comment.id %}" class="adelete">Delete</a>
+    {% endif %}
+    <p>{{comment}}</p><hr>
+    {% endfor %}
+</div>
